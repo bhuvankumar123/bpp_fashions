@@ -52,18 +52,17 @@ $.ajax({
         html+='</div>';
         html+='</div>';
         $('.container-fluid').append(html)
-        sessionStorage.setItem(prodid,prodid)
-        var arr=[]
-        i=0
-        for (let k in sessionStorage){
-          if (i<sessionStorage.length){
-            arr.push(k)
-            i+=1
-          }
-        }
-        newarr=arr.slice(-20)
-        /*$.ajax({
-          url:'http://127.0.0.1:5000/api/products/'+prodid+'/recommendations',
+        },
+  complete:function(){
+    $('.lds-ellipsis').hide();
+    $('#wrapper').show();
+  },
+  error:function(){
+    window.location.href="/404.html"
+  }
+})
+$.ajax({
+          url:'http://bpp.fashions.com/api/products/'+prodid+'/recommendations',
           type:'GET',
           data:newarr,
           success:function(recommendata){
@@ -82,16 +81,7 @@ $.ajax({
             $('#recommendations').append(rechtml)
             }
           }
-        })*/
-        },
-  complete:function(){
-    $('.lds-ellipsis').hide();
-    $('#wrapper').show();
-  },
-  error:function(){
-    window.location.href="/404.html"
-  }
-})
+        })
 })
 function category(val){
           ceurl=new URL("http://bpp.fashions.com")
@@ -103,6 +93,7 @@ function category(val){
 <div class="container-fluid">
 </div>
 <div class="row row-cols-1 row-cols-md-4 mx-center" id="recommendations">
+Recommended For You
 </div>
 <script type="text/javascript" src="script.js"></script>
 </body>
